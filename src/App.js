@@ -1,33 +1,38 @@
-import React from "react";
-import Header from "./Header";
-import Content from "./Content";
-import Total from "./Total";
+import React, { useState } from "react";
+import Person from "./components/Person";
 
 const App = () => {
-  const course = "Half Stack application development";
-  const part1 = {
-    name: "Fundamentals of React",
-    exercises: 10,
+  const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
+  const [newName, setNewName] = useState("");
+
+  const addPerson = (event) => {
+    event.preventDefault();
+    console.log(newName);
+    setPersons(persons.concat({ name: newName }));
+    setNewName("");
   };
-  const part2 = {
-    name: "Using props to pass data",
-    exercises: 7,
-  };
-  const part3 = {
-    name: "State of a component",
-    exercises: 14,
+
+  const handleNameChange = (event) => {
+    setNewName(event.target.value);
   };
 
   return (
     <div>
-      <Header course={course}></Header>
-      <Content part={part1}></Content>
-      <Content part={part2}></Content>
-      <Content part={part3}></Content>
-
-      <Total total_exer={part1.exercises + part2.exercises + part3.exercises}>
-        Number of exercises
-      </Total>
+      <h2>Phonebook</h2>
+      <form onSubmit={addPerson}>
+        <div>
+          name: <input value={newName} onChange={handleNameChange} />
+        </div>
+        <div>
+          <button type="submit">add</button>
+        </div>
+      </form>
+      <h2>Numbers</h2>
+      <ul>
+        {persons.map((person) => (
+          <Person key={person.name} name={person.name}></Person>
+        ))}
+      </ul>
     </div>
   );
 };
