@@ -1,6 +1,13 @@
 import React from "react";
-import Content from "./Content";
 import Header from "./Header";
+
+const Statistic = ({ text, value }) => {
+  return (
+    <div>
+      {text}: {value}
+    </div>
+  );
+};
 
 const Statistics = ({ good, neutral, bad }) => {
   if (good === 0 && neutral === 0 && bad === 0) {
@@ -14,12 +21,15 @@ const Statistics = ({ good, neutral, bad }) => {
   return (
     <div>
       <Header text="Statistics"></Header>
-      <Content text="good" count={good}></Content>
-      <Content text="neutral" count={neutral}></Content>
-      <Content text="bad" count={bad}></Content>
-      <Content text="all" count={good + bad + neutral}></Content>
-      <Content text="average" count={(good + bad + neutral) / 3}></Content>
-      <Content text="positive" count={good / (good + bad + neutral)}></Content>
+      <Statistic text="good" value={good}></Statistic>
+      <Statistic text="neutral" value={neutral}></Statistic>
+      <Statistic text="bad" value={bad}></Statistic>
+      <Statistic text="all" value={good + bad + neutral}></Statistic>
+      <Statistic text="average" value={(good + bad + neutral) / 3}></Statistic>
+      <Statistic
+        text="positive"
+        value={(good / (good + bad + neutral)) * 100 + "%"}
+      ></Statistic>
     </div>
   );
 };
