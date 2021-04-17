@@ -3,9 +3,10 @@ import Header from "./Header";
 
 const Statistic = ({ text, value }) => {
   return (
-    <div>
-      {text}: {value}
-    </div>
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
   );
 };
 
@@ -21,15 +22,22 @@ const Statistics = ({ good, neutral, bad }) => {
   return (
     <div>
       <Header text="Statistics"></Header>
-      <Statistic text="good" value={good}></Statistic>
-      <Statistic text="neutral" value={neutral}></Statistic>
-      <Statistic text="bad" value={bad}></Statistic>
-      <Statistic text="all" value={good + bad + neutral}></Statistic>
-      <Statistic text="average" value={(good + bad + neutral) / 3}></Statistic>
-      <Statistic
-        text="positive"
-        value={(good / (good + bad + neutral)) * 100 + "%"}
-      ></Statistic>
+      <table>
+        <tbody>
+          <Statistic text="good" value={good}></Statistic>
+          <Statistic text="neutral" value={neutral}></Statistic>
+          <Statistic text="bad" value={bad}></Statistic>
+          <Statistic text="all" value={good + bad + neutral}></Statistic>
+          <Statistic
+            text="average"
+            value={(good + bad + neutral) / 3}
+          ></Statistic>
+          <Statistic
+            text="positive"
+            value={(good / (good + bad + neutral)) * 100 + "%"}
+          ></Statistic>
+        </tbody>
+      </table>
     </div>
   );
 };
