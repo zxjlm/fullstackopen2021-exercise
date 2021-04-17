@@ -19,6 +19,7 @@ const App = () => {
   };
 
   const voteHandler = () => {
+    console.log(Math.max(...voted));
     let tmp = [...voted];
     tmp[selected] += 1;
     setVoted(tmp);
@@ -26,10 +27,19 @@ const App = () => {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <div>{anecdotes[selected]}</div>
       <div>has {voted[selected]} votes</div>
       <button onClick={changeSeletedHandler}>next anecdote</button>
       <button onClick={voteHandler}>vote</button>
+      <h1>Anecdote with most votes</h1>
+      <div>
+        {anecdotes[voted.findIndex((elem) => elem === Math.max(...voted))]}
+      </div>
+      <div>
+        has {voted[voted.findIndex((elem) => elem === Math.max(...voted))]}{" "}
+        votes
+      </div>
     </div>
   );
 };
