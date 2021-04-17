@@ -9,17 +9,27 @@ const App = () => {
     "Premature optimization is the root of all evil.",
     "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
   ];
+  const vote_array = new Array(anecdotes.length).fill(0);
 
   const [selected, setSelected] = useState(0);
+  const [voted, setVoted] = useState(vote_array);
 
   const changeSeletedHandler = () => {
     setSelected(Math.floor(Math.random() * anecdotes.length));
   };
 
+  const voteHandler = () => {
+    let tmp = [...voted];
+    tmp[selected] += 1;
+    setVoted(tmp);
+  };
+
   return (
     <div>
       <div>{anecdotes[selected]}</div>
+      <div>has {voted[selected]} votes</div>
       <button onClick={changeSeletedHandler}>next anecdote</button>
+      <button onClick={voteHandler}>vote</button>
     </div>
   );
 };
