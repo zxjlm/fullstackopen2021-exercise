@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import Feedback from "./Feedback";
-import Content from "./Content";
 import Statistics from "./Statistics";
 
 const App = () => {
@@ -28,10 +27,6 @@ const App = () => {
       <Feedback clickHandler={goodFeedbackClick} text={"good"}></Feedback>
       <Feedback clickHandler={neutralFeedbackClick} text={"neutral"}></Feedback>
       <Feedback clickHandler={badFeedbackClick} text={"bad"}></Feedback>
-      <Header text="Statistics"></Header>
-      <Content text="good" count={good}></Content>
-      <Content text="neutral" count={neutral}></Content>
-      <Content text="bad" count={bad}></Content>
       <Statistics good={good} neutral={neutral} bad={bad}></Statistics>
     </div>
   );
