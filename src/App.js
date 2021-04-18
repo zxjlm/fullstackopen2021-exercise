@@ -2,16 +2,15 @@ import React, { useState, useEffect } from "react";
 import Person from "./components/Person";
 import PersonForm from "./components/PersonForm";
 import Filter from "./components/Filter";
-import axios from "axios";
+import personService from "./service/persons";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
-  const [personToShow, setPersonToShow] = useState([]);
+  const [personToShow, setPersonToShow] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => {
+    personService.getAll().then((response) => {
       setPersons(response.data);
-      setPersonToShow(response.data);
     });
   }, []);
 
@@ -25,13 +24,18 @@ const App = () => {
 
       <h2>Numbers</h2>
       <ul>
-        {personToShow.map((person) => (
-          <Person
-            key={person.name}
-            name={person.name}
-            number={person.number}
-          ></Person>
-        ))}
+        {persons
+          .filter(
+            (person) => person.name.toLowerCase().indexOf(personToShow) !== -1
+          )
+          .map((person) => (
+            <Person
+              key={person.name}
+              person={person}
+              setPersons={setPersons}
+              persons={persons}
+            ></Person>
+          ))}
       </ul>
     </div>
   );
