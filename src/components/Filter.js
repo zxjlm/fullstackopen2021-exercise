@@ -12,3 +12,5 @@ const Filter = ({ setSearchText }) => {
     </div>
   );
 };
+
+export default Filter;
